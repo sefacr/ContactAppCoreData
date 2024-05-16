@@ -10,8 +10,8 @@ import Foundation
 class DetailViewModel {
     var krepo = KisilerDaoRepository()
     
-    func update(kisi_id: Int, kisi_ad: String, kisi_tel: String){
-        krepo.update(kisi_id: kisi_id, kisi_ad: kisi_ad, kisi_tel: kisi_tel)
+    func update(person: ContactModel, kisi_ad: String, kisi_tel: String){
+        krepo.update(person: person, kisi_ad: kisi_ad, kisi_tel: kisi_tel)
     }
     
 }

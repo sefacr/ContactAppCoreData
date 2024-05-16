@@ -13,7 +13,7 @@ class MainScreen: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var personsTableView: UITableView!
     
-    var PersonList = [Kisiler]()
+    var PersonList = [ContactModel]()
     var viewModel = MainScreenViewModel()
     
     override func viewDidLoad() {
@@ -37,7 +37,7 @@ class MainScreen: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDetail" {
-            if let person = sender as? Kisiler { //sender'i any'den Kisiler'e çevirdik super class sub class dönüşümünü sağlatık ??
+            if let person = sender as? ContactModel { //sender'i any'den Kisiler'e çevirdik super class sub class dönüşümünü sağlatık ??
                 let destinationVC = segue.destination as! DetailViewController
                 destinationVC.person = person
                 
@@ -63,8 +63,8 @@ extension MainScreen : UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "personCell") as! PersonsTableViewCell
         
         let person = PersonList[indexPath.row]
-        cell.nameLabel.text = person.kisi_ad
-        cell.phoneNumberLabel.text = person.kisi_tel
+        cell.nameLabel.text = person.person_name
+        cell.phoneNumberLabel.text = person.person_phoneNumber
         
         return cell
     }
@@ -80,12 +80,12 @@ extension MainScreen : UITableViewDelegate, UITableViewDataSource {
             contextualAction, view, bool in
             let person = self.PersonList[indexPath.row]
             
-            let alert = UIAlertController(title: "DELETE", message: "Are you sure you want to have '\(person.kisi_ad!)' ? ", preferredStyle: .alert)
+            let alert = UIAlertController(title: "DELETE", message: "Are you sure you want to have '\(person.person_name!)' ? ", preferredStyle: .alert)
             let cancelBtn = UIAlertAction(title: "Cancel", style: .cancel)
             alert.addAction(cancelBtn)
             let deleteBtn = UIAlertAction(title: "Delete Contact", style: .destructive) {
                 action in
-                self.viewModel.delete(personId: person.kisi_id!)
+                self.viewModel.delete(person: person)
             }
             alert.addAction(deleteBtn)
             

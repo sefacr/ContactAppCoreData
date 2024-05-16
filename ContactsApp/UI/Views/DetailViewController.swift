@@ -11,22 +11,22 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var phoneNumberTextField: UITextField!
     
-    var person: Kisiler?
+    var person: ContactModel?
     var viewModel = DetailViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let k = person {
-            nameTextField.text = k.kisi_ad
-            phoneNumberTextField.text = k.kisi_tel
+            nameTextField.text = k.person_name
+            phoneNumberTextField.text = k.person_phoneNumber
         }
        
     }
     
     @IBAction func updateBtnClicked(_ sender: Any) {
         if let name = nameTextField.text, let phoneNumber = phoneNumberTextField.text, let k = person {
-            viewModel.update(kisi_id: k.kisi_id!, kisi_ad: name, kisi_tel: phoneNumber)
+            viewModel.update(person: k, kisi_ad: name, kisi_tel: phoneNumber)
         }
     }
     
