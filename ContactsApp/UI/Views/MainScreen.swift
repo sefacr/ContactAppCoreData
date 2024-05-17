@@ -50,7 +50,11 @@ class MainScreen: UIViewController {
 
 extension MainScreen : UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        viewModel.search(searchText: searchText)
+        if searchText == "" {
+            viewModel.uploadContacts()
+        }else {
+            viewModel.search(searchText: searchText)
+        }
     }
 }
 
